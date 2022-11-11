@@ -26,4 +26,4 @@ npm run build
 
 ## 商品数据
 
-商品数据使用Julia脚本随机生成，在
+商品数据使用Julia脚本随机生成，在`/dataTool`文件夹中可查看。
