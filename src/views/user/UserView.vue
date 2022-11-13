@@ -1,11 +1,11 @@
 <template>
     <div>
         <n-form inline :label-width="100" :model="selected_data" class="good-search">
-            <n-form-item label="用户昵称" path="user.name" label-placement="left">
+            <n-form-item label="用户昵称" label-placement="left">
                 <n-input v-model:value="selected_data.nickName" placeholder="请输入用户昵称" />
             </n-form-item>
-            <n-form-item label="用户角色" path="user.age" label-placement="left">
-                <n-select v-model:value="selected_data.role" multiple :options="options" />
+            <n-form-item label="用户角色" label-placement="left">
+                <n-select v-model:value="selected_data.role" placeholder="搜索歌曲" :options="options" />
             </n-form-item>
             <n-form-item label-placement="left">
                 <n-button @click="onSubmit">
@@ -20,12 +20,12 @@
 
 <script lang="ts">
 
-import { defineComponent, onMounted, toRefs, reactive, h } from 'vue'
+import { defineComponent, onMounted, toRefs, reactive, h, watch } from 'vue'
 import { getRoleList, getUserList } from "@/request/api";
 import { UserPages } from "@/type/user";
 import type { IUser, UserRowData } from "@/type/user";
-import type {IRole} from "@/type/role"
-import { NTag, useMessage } from 'naive-ui'
+import type { IRole } from "@/type/role"
+import { NTag } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 
 const createColumns = (): DataTableColumns<UserRowData> => {
@@ -46,7 +46,7 @@ const createColumns = (): DataTableColumns<UserRowData> => {
             title: '角色',
             key: 'role',
             render(row) {
-                const tags = row.role.map((tagKey:string) => {
+                const tags = row.role.map((tagKey: string) => {
                     return h(
                         NTag,
                         {
@@ -71,30 +71,30 @@ export default defineComponent({
     setup() {
         const user_data = reactive(new UserPages())
 
+        const getShowData = (datalist: IUser[]) => {
+            const len = datalist.length
+            const data: UserRowData[] = new Array(len)
+            for (var i = 0; i < len; i++) {
+                data[i] = {
+                    key: i,
+                    id: datalist[i].id,
+                    userName: datalist[i].userName,
+                    nickName: datalist[i].nickName,
+                    role: datalist[i].role.map((role: IRole) => { return role.roleName })
+                }
+            }
+            return data
+        }
         const p_getUserList = () => {
             getUserList().then(res => {
-
-                const udata = res.data.data
-                const len = udata.length
-                const data: UserRowData[] = new Array(len)
-                for (var i = 0; i < len; i++) {
-                    data[i] = {
-                        key: i,
-                        id: udata[i].id,
-                        userName: udata[i].userName,
-                        nickName: udata[i].nickName,
-                        role: udata[i].role.map((role:IRole) => { return role.roleName})
-                    }
-                }
-                user_data.showUser = data
-                console.log(data)
-                user_data.user_list = udata
+                const userdata: IUser[] = res.data.data
+                user_data.user_list = res.data.data
+                user_data.showUser = getShowData(userdata)
             })
         }
-
         const p_getRoleList = () => {
             getRoleList().then(res => {
-                // console.log(res)
+                console.log(res)
                 // user_data.role_with_auth_list = res.data.data
             })
         }
@@ -103,10 +103,41 @@ export default defineComponent({
             p_getUserList()  // 获取全部用户数据
             p_getRoleList()  // 获取全部角色数据
         })
+        // 点击查询用户按钮时触发
+        const onSubmit = () => {
+            let search_res: IUser[] = []  // 接受查询用户se的结果
+            if (user_data.selected_data.nickName || user_data.selected_data.role) {
+                if (user_data.selected_data.nickName) {
+                    search_res = user_data.user_list.filter((value) => {
+                        return value.nickName.indexOf(user_data.selected_data.nickName) !== -1
+                    })
+                }
+                if (user_data.selected_data.role) {
+                    console.log(user_data.selected_data.role)
+                    search_res = user_data.selected_data.nickName ? search_res : user_data.user_list
+                    search_res = search_res.filter((value) => {
+                        return value.role.find((item) => item.role === user_data.selected_data.role)
+                    })
+                }
+            }
+            else {
+                search_res = user_data.user_list
+            }
+            user_data.showUser = getShowData(search_res)
+        }
 
+        watch([() => user_data.selected_data.nickName, () => user_data.selected_data.role], () => {
+            if (user_data.selected_data.nickName === "" || user_data.selected_data.role === 0) {
+                p_getUserList()
+            }
+        })
         return {
             ...toRefs(user_data),
             options: [
+                {
+                    label: '全部',
+                    value: 0
+                },
                 {
                     label: '管理员',
                     value: 1
@@ -117,7 +148,8 @@ export default defineComponent({
                 }
             ],
             columns: createColumns(),
-            pagination: { pageSize: 10 }
+            pagination: { pageSize: 10 },
+            onSubmit
         }
     }
 })
