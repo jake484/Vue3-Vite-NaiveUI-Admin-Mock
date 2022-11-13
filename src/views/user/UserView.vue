@@ -25,10 +25,10 @@ import { getRoleList, getUserList } from "@/request/api";
 import { UserPages } from "@/type/user";
 import type { IUser, UserRowData } from "@/type/user";
 import type { IRole } from "@/type/role"
-import { NTag } from 'naive-ui'
+import { NTag, NButton} from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 
-const createColumns = (): DataTableColumns<UserRowData> => {
+const createColumns = ({ toChageData }: { toChageData: (rowData: UserRowData) => void }): DataTableColumns<UserRowData> => {
     return [
         {
             title: 'Id',
@@ -53,7 +53,7 @@ const createColumns = (): DataTableColumns<UserRowData> => {
                             style: {
                                 marginRight: '6px'
                             },
-                            type: 'info',
+                            type: 'primary',
                             bordered: false
                         },
                         {
@@ -63,6 +63,24 @@ const createColumns = (): DataTableColumns<UserRowData> => {
                 })
                 return tags
             }
+        },
+        {
+            title: '操作',
+            key: 'actions',
+            render(row) {
+                return h(
+                    NButton,
+                    {
+                        size: 'large',
+                        type: 'info',
+                        style: {
+                            "--n-width": '120px'
+                        },
+                        onClick: () => toChageData(row)
+                    },
+                    { default: () => '编辑' }
+                )
+            }
         }
     ]
 }
@@ -70,7 +88,6 @@ const createColumns = (): DataTableColumns<UserRowData> => {
 export default defineComponent({
     setup() {
         const user_data = reactive(new UserPages())
-
         const getShowData = (datalist: IUser[]) => {
             const len = datalist.length
             const data: UserRowData[] = new Array(len)
@@ -98,7 +115,6 @@ export default defineComponent({
                 // user_data.role_with_auth_list = res.data.data
             })
         }
-
         onMounted(() => {
             p_getUserList()  // 获取全部用户数据
             p_getRoleList()  // 获取全部角色数据
@@ -147,12 +163,17 @@ export default defineComponent({
                     value: 2
                 }
             ],
-            columns: createColumns(),
+            columns: createColumns({
+                toChageData(rowData) {
+                    console.log("hh")
+                }
+            }),
             pagination: { pageSize: 10 },
             onSubmit
         }
     }
-})
+}
+)
 </script>
 
 <style lang="scss" scoped>
