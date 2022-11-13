@@ -13,6 +13,17 @@ function usersDataGen(userNum::Int)
         if num == 1
             return [
                 Dict([
+                    ("role", 1)
+                    ("roleName", "管理员")
+                ]),
+                Dict([
+                    ("role", 2)
+                    ("roleName", "普通用户")
+                ])
+            ]
+        elseif num == 2
+            return [
+                Dict([
                     ("role", 2)
                     ("roleName", "普通用户")
                 ])
@@ -33,7 +44,7 @@ function usersDataGen(userNum::Int)
             ("id", i)
             ("nickName", nickName)
             ("userName", nickName)
-            ("role", getRole(rand(1:2)))
+            ("role", getRole(rand(1:3)))
         ])
         push!(users, user)
     end
