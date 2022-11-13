@@ -1,6 +1,6 @@
 {
     "data": {
-        "msg": "登录成功",
+        "msg": "获取成功",
         "token": "admin_token",
         "success": true,
         "data": [

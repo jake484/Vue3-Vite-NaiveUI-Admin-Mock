@@ -17,11 +17,9 @@ export interface IQueryGoods {
 // 商品具体展示数据
 export class GoodsPages {
     // 被选择的数据, 查询时用
-    selected_data: IQueryGoods = {
-        key: 0,
-        id: 0,
+    selected_data = {
         title: "",
-        introduce: "",
+        introduce: ""
     }
     // 展示的商品数据
     goods_list: IQueryGoods[] = []

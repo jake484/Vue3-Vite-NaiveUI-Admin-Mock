@@ -1,0 +1,258 @@
+{
+    "data": {
+        "msg": "获取成功",
+        "token": "admin_token",
+        "success": true,
+        "data": [
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    }
+                ],
+                "id": 1,
+                "nickName": "woxpw",
+                "userName": "woxpw"
+            },
+            {
+                "role": [
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 2,
+                "nickName": "ooncf",
+                "userName": "ooncf"
+            },
+            {
+                "role": [
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 3,
+                "nickName": "tghyu",
+                "userName": "tghyu"
+            },
+            {
+                "role": [
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 4,
+                "nickName": "aposn",
+                "userName": "aposn"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    }
+                ],
+                "id": 5,
+                "nickName": "tpsjh",
+                "userName": "tpsjh"
+            },
+            {
+                "role": [
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 6,
+                "nickName": "mmoes",
+                "userName": "mmoes"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    },
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 7,
+                "nickName": "vsgth",
+                "userName": "vsgth"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    },
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 8,
+                "nickName": "ozaoi",
+                "userName": "ozaoi"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    },
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 9,
+                "nickName": "mngem",
+                "userName": "mngem"
+            },
+            {
+                "role": [
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 10,
+                "nickName": "rkvwj",
+                "userName": "rkvwj"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    },
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 11,
+                "nickName": "utnjj",
+                "userName": "utnjj"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    },
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 12,
+                "nickName": "usgvq",
+                "userName": "usgvq"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    }
+                ],
+                "id": 13,
+                "nickName": "oxdls",
+                "userName": "oxdls"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    }
+                ],
+                "id": 14,
+                "nickName": "jpdmi",
+                "userName": "jpdmi"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    },
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 15,
+                "nickName": "ukhkm",
+                "userName": "ukhkm"
+            },
+            {
+                "role": [
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 16,
+                "nickName": "mrrxe",
+                "userName": "mrrxe"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    }
+                ],
+                "id": 17,
+                "nickName": "ldktl",
+                "userName": "ldktl"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    },
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 18,
+                "nickName": "xeeur",
+                "userName": "xeeur"
+            },
+            {
+                "role": [
+                    {
+                        "role": 1,
+                        "roleName": "管理员"
+                    }
+                ],
+                "id": 19,
+                "nickName": "hajoo",
+                "userName": "hajoo"
+            },
+            {
+                "role": [
+                    {
+                        "role": 2,
+                        "roleName": "普通用户"
+                    }
+                ],
+                "id": 20,
+                "nickName": "pcvhx",
+                "userName": "pcvhx"
+            }
+        ],
+        "code": 200
+    }
+}

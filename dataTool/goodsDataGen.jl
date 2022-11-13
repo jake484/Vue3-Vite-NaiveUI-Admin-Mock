@@ -2,7 +2,7 @@ using JSON3
 products = Dict(
     "data" => Dict(
         "code" => 200,
-        "msg" => "登录成功",
+        "msg" => "获取成功",
         "success" => true,
         "token" => "admin_token"
     )
