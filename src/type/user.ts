@@ -1,4 +1,13 @@
-import type {IRole, IRoleWithAuth} from "@/type/role";
+import type { IRole, IRoleWithAuth } from "@/type/role";
+
+// 用户编辑接口
+export interface UserRowData {
+    key: number,  // 用户key
+    id: number,  // 用户id
+    nickName: string,  // 用户昵称
+    role: string[],   // 用户角色
+    userName: string  // 用户名
+}
 
 // 用户接口
 export interface IUser {
@@ -9,7 +18,7 @@ export interface IUser {
 }
 
 // 用户查询接口
-export interface IQueryUser{
+export interface IQueryUser {
     nickName: string,  // 用户别名
     role: number  // 角色编号
 }
@@ -23,7 +32,7 @@ export interface IUserEdit {
 }
 
 // 用户具体展示数据
-export class UserPages{
+export class UserPages {
     // 没有做分页是因为,用户和角色数据往往比较少
     selected_data: IQueryUser = {
         nickName: "",
@@ -39,4 +48,5 @@ export class UserPages{
         role: [],
         userName: ""
     }
+    showUser: UserRowData[] = []
 }

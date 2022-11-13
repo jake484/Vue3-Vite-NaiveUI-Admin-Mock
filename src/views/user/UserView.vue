@@ -13,16 +13,59 @@
                 </n-button>
             </n-form-item>
         </n-form>
-        <n-data-table :bordered="true" :single-line="false" :columns="columns" :data="goods_list"
+        <n-data-table :bordered="true" :single-line="false" :columns="columns" :data="showUser"
             :pagination="pagination" />
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, toRefs, reactive } from 'vue'
+
+import { defineComponent, onMounted, toRefs, reactive, h } from 'vue'
 import { getRoleList, getUserList } from "@/request/api";
 import { UserPages } from "@/type/user";
-import type { IUser } from "@/type/user";
+import type { IUser, UserRowData } from "@/type/user";
+import type {IRole} from "@/type/role"
+import { NTag, useMessage } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
+
+const createColumns = (): DataTableColumns<UserRowData> => {
+    return [
+        {
+            title: 'Id',
+            key: 'id'
+        },
+        {
+            title: '昵称',
+            key: 'nickName'
+        },
+        {
+            title: '用户名称',
+            key: 'userName'
+        },
+        {
+            title: '角色',
+            key: 'role',
+            render(row) {
+                const tags = row.role.map((tagKey:string) => {
+                    return h(
+                        NTag,
+                        {
+                            style: {
+                                marginRight: '6px'
+                            },
+                            type: 'info',
+                            bordered: false
+                        },
+                        {
+                            default: () => tagKey
+                        }
+                    )
+                })
+                return tags
+            }
+        }
+    ]
+}
 
 export default defineComponent({
     setup() {
@@ -30,13 +73,28 @@ export default defineComponent({
 
         const p_getUserList = () => {
             getUserList().then(res => {
-                console.log(res)
-                // user_data.user_list = res.data.data
+
+                const udata = res.data.data
+                const len = udata.length
+                const data: UserRowData[] = new Array(len)
+                for (var i = 0; i < len; i++) {
+                    data[i] = {
+                        key: i,
+                        id: udata[i].id,
+                        userName: udata[i].userName,
+                        nickName: udata[i].nickName,
+                        role: udata[i].role.map((role:IRole) => { return role.roleName})
+                    }
+                }
+                user_data.showUser = data
+                console.log(data)
+                user_data.user_list = udata
             })
         }
+
         const p_getRoleList = () => {
             getRoleList().then(res => {
-                console.log(res)
+                // console.log(res)
                 // user_data.role_with_auth_list = res.data.data
             })
         }
@@ -57,7 +115,9 @@ export default defineComponent({
                     label: '普通用户',
                     value: 2
                 }
-            ]
+            ],
+            columns: createColumns(),
+            pagination: { pageSize: 10 }
         }
     }
 })
