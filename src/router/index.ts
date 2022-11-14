@@ -28,12 +28,16 @@ const router = createRouter({
           },
           component: () => import('../views/user/UserView.vue')
         },
+        {
+          path: 'role',
+          name: 'role',
+          meta: {
+            isShow: true,  // 是否需要被展示出来
+            title: "角色列表"
+          },
+          component: () => import('../views/role/RoleView.vue')
+        },
       ]
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue')
     },
     {
       path: '/login',

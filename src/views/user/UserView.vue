@@ -22,7 +22,7 @@
         <!-- 数据表格 -->
         <n-data-table :bordered="true" :single-line="false" :columns="columns" :data="showUser"
             :pagination="pagination" />
-        <!-- 编辑权限表单 -->
+        <!-- //编辑权限表单 -->
         <n-modal v-model:show="editShow" preset="dialog" title="编辑权限" positive-text="确认更改" negative-text="取消修改"
             type="info" showIcon=false @positive-click="ensureEditUser">
             <n-form-item label="用户昵称" label-placement="left">
@@ -243,11 +243,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .n-select {
     width: 220px;
-}
-
-.good-search {
-    width: 49%;
-    padding: 10px;
 }
 
 .n-dialog__content {
