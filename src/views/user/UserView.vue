@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 查询表单 -->
-        <n-form inline :label-width="100" :model="selected_data" class="good-search">
+        <n-form inline :label-width="100" :model="selected_data" class="user-search">
             <n-form-item label="用户昵称" label-placement="left">
                 <n-input v-model:value="selected_data.nickName" placeholder="请输入用户昵称" />
             </n-form-item>
@@ -109,6 +109,7 @@ const createColumns = ({ toChageData }: { toChageData: (rowData: UserRowData) =>
 export default defineComponent({
     setup() {
         const user_data = reactive(new UserPages())
+        // 额外添加了一层数据结构，这一层不是必须的
         const getShowData = (datalist: IUser[]) => {
             const len = datalist.length
             const data: UserRowData[] = new Array(len)
@@ -244,7 +245,10 @@ export default defineComponent({
 .n-select {
     width: 220px;
 }
-
+.user-search {
+    width: 49%;
+    padding: 10px;
+}
 .n-dialog__content {
     .n-select {
         width: 320px;

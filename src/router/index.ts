@@ -37,13 +37,23 @@ const router = createRouter({
           },
           component: () => import('../views/role/RoleView.vue')
         },
+        {
+          path: 'authority',
+          name: 'AuthorityView',
+          meta: {
+            isShow: false,  // 是否需要被展示出来
+            title: "角色列表"
+          },
+          component: () => import('../views/authority/AuthorityView.vue')
+        }
       ]
     },
     {
       path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue')
-    }
+    },
+
   ]
 })
 

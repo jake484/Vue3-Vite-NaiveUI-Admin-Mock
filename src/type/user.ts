@@ -1,6 +1,6 @@
 import type { IRole, IRoleWithAuth } from "@/type/role";
 
-// 用户编辑接口
+// 带key的用户接口，额外添加的，不是必须的
 export interface UserRowData extends IUser {
     key: number  // 用户key
 }

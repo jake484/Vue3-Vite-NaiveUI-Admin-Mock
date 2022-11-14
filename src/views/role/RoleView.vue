@@ -29,9 +29,9 @@ import { RolePages } from "@/type/role";
 import type { IRoleWithAuth } from "@/type/role"
 import { NTag, NButton } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
-
+import { useRouter } from "vue-router";
 // 定义表格列属性
-const createColumns = ({ toChageData }: { toChageData: (rowData: IRoleWithAuth) => void }): DataTableColumns<IRoleWithAuth> => {
+const createColumns = ({ onChangeRole }: { onChangeRole: (rowData: IRoleWithAuth) => void }): DataTableColumns<IRoleWithAuth> => {
   return [
     {
       title: 'Id',
@@ -64,33 +64,32 @@ const createColumns = ({ toChageData }: { toChageData: (rowData: IRoleWithAuth) 
       }
     },
     {
-            title: '操作',
-            key: 'actions',
-            render(row) {
-                return h(
-                    NButton,
-                    {
-                        size: 'large',
-                        type: 'info',
-                        style: {
-                            "--n-width": '160px'
-                        },
-                        onClick: () => {
-                            // chageShow()
-                            toChageData(row)
-                        }
-                    },
-                    { default: () => '修改权限' }
-                )
+      title: '操作',
+      key: 'actions',
+      render(row) {
+        return h(
+          NButton,
+          {
+            size: 'large',
+            type: 'info',
+            style: {
+              "--n-width": '160px'
+            },
+            onClick: () => {
+              // chageShow()
+              onChangeRole(row)
             }
-        }
+          },
+          { default: () => '修改权限' }
+        )
+      }
+    }
   ]
 }
-
 export default defineComponent({
   setup() {
     const role_data = reactive(new RolePages())
-
+    const router = useRouter()
     const p_getRoleList = () => {
       getRoleList().then(res => {
         role_data.role_list = res.data.data
@@ -99,6 +98,7 @@ export default defineComponent({
     onMounted(() => {
       p_getRoleList()  // 获取全部角色数据
     })
+
     const onAddRole = () => {
       role_data.role_list.push({
         roleId: role_data.role_list.length + 1,
@@ -109,12 +109,15 @@ export default defineComponent({
     return {
       ...toRefs(role_data),
       columns: createColumns({
-        toChageData(rowData) {
-          // role_data.editUser.id = rowData.id
-          // role_data.editUser.role = rowData.role.map((role: IRole) => { return role.role })
-          // role_data.editUser.nickName = rowData.nickName
-          // role_data.editUser.userName = rowData.userName
-          console.log(rowData)
+        onChangeRole(row) {
+          console.log(row)
+          router.push({
+            name: "AuthorityView",
+            params: {
+              id: row.roleId,
+              authority: row.authority
+            }
+          })
         }
       }),
       // 展示列
