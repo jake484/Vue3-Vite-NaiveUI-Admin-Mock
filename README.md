@@ -4,7 +4,9 @@ Vue3-Vite-NaiveUI-Admin-Mock的自学练习项目。
 
 原始项目来自于B站[一行行代码带你敲，Vue3+TS电商后台系统项目实战](https://www.bilibili.com/video/BV1nr4y1G73d?p=1 )
 
-在练习过程中进行了基于Naive-UI的重构。同时也做了一些修改。
+感谢UP（写网页的丁丁）的视频教学与高赞评论（C桑呀）的代码分享
+
+在练习过程中进行了基于Naive-UI的重构。同时也做了一些修改。供学习参考！
 
 ## 安装依赖
 
