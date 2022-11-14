@@ -1,12 +1,8 @@
 import type { IRole, IRoleWithAuth } from "@/type/role";
 
 // 用户编辑接口
-export interface UserRowData {
-    key: number,  // 用户key
-    id: number,  // 用户id
-    nickName: string,  // 用户昵称
-    role: string[],   // 用户角色
-    userName: string  // 用户名
+export interface UserRowData extends IUser {
+    key: number  // 用户key
 }
 
 // 用户接口

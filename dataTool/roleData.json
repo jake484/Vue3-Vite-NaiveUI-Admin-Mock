@@ -25,7 +25,7 @@
                 ]
             },
             {
-                "roleName": "管理员",
+                "roleName": "普通用户",
                 "roleId": 2,
                 "authority": [
                     1,

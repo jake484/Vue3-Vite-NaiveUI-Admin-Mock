@@ -1,5 +1,6 @@
 <template>
   <n-layout>
+    <!-- 标题栏 -->
     <n-layout-header>
       <n-grid x-gap="12" :cols="8">
         <n-gi span=2>
@@ -9,28 +10,46 @@
           <h2>后台管理系统</h2>
         </n-gi>
         <n-gi span=1>
-          <span class="quit-login">退出登录</span>
+          <span class="quit-login">
+            <!-- 弹出框 -->
+            <n-popconfirm positive-text="确定" negative-text="点错了"
+              @positive-click="delToken">
+              <template #trigger>
+                <n-button type="info">退出登录</n-button>
+              </template>
+              确定退出？
+            </n-popconfirm>
+          </span>
         </n-gi>
       </n-grid>
     </n-layout-header>
+
     <n-layout has-sider>
+
+      <!-- 侧栏 -->
       <n-layout-sider>
         <n-menu :options="menuOptions" @update:value="handleUpdateValue"
           style="--n-item-height:60px;--n-item-text-color:#ffffff;--n-font-size:20px" />
       </n-layout-sider>
+
+      <!-- 内容 -->
       <n-layout-content content-style="padding: 5px;">
         <router-view></router-view>
       </n-layout-content>
+
     </n-layout>
-    <!-- <n-layout-footer>成府路</n-layout-footer> -->
+
+    <!-- 底部 -->
+    <n-layout-footer>
+      <p style="text-align:center">Copyright©2022. Created by jake484. MIT licence</p>
+    </n-layout-footer>
   </n-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
-import { useRouter, RouterLink } from "vue-router"
+import { defineComponent, ref } from 'vue'
+import { useRouter } from "vue-router"
 import type { MenuOption } from 'naive-ui'
-
 
 export default defineComponent({
   setup() {
@@ -43,14 +62,21 @@ export default defineComponent({
         key: need_list[i].path?.toString()
       }
     }
+    // 路由
     const handleUpdateValue = (key: string, item: MenuOption) => {
       router.push(key)
+    }
+    // 删除token
+    const delToken = () => {
+      localStorage.removeItem("token")
+      router.push("/login")
     }
     return {
       activeKey: ref<string | null>(null),
       menuOptions,
       need_list,
-      handleUpdateValue
+      handleUpdateValue,
+      delToken
     }
   }
 })

@@ -8,7 +8,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      // redirect: 'goods',
+      redirect: 'goods',
       children: [
         {
           path: 'goods',
@@ -33,9 +33,6 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
     {
@@ -44,6 +41,17 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue')
     }
   ]
+})
+
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  const token: string | null = localStorage.getItem("token")
+  if(!token && to.path !== "/login"){
+    next("/login")
+  }
+  else{
+    next()
+  }
 })
 
 export default router
